@@ -1,0 +1,23 @@
+utilisateurs:
+    resource: "@UtilisateursBundle/Resources/config/routing.yml"
+    prefix:   /
+
+contacts:
+    pattern:   /contacts
+    defaults: {_controller: UtilisateursBundle:Contacts:index}
+
+addcontact:
+    pattern:   /addcontact
+    defaults: {_controller: UtilisateursBundle:Contacts:ajout}
+
+deletecontact:
+    pattern:   /deletecontact
+    defaults: {_controller: UtilisateursBundle:Contacts:suppr}
+
+editcontact:
+    pattern:   /editcontact
+    defaults: {_controller: UtilisateursBundle:Contacts:edit}
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

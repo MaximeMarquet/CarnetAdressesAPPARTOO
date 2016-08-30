@@ -1,0 +1,142 @@
+{% extends "::layout/layout.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <h2 class="header" style="text-align: -webkit-center;">Contacts</h2>
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <ul class="collapsible" data-collapsible="accordion">
+                            {% for contact in contacts %}
+                            <li>
+                                <div class="collapsible-header" style="text-align: -webkit-center;">
+                                    <b>{{ contact.prenom }} {{ contact.nom }}</b>
+                                </div>
+                                <div class="collapsible-body" style="text-align: -webkit-center;">
+                                    <p>
+                                        <b>Mail :</b> {{ contact.email }} <br>
+                                        <b>Address :</b> {{ contact.adresse }} <br>
+                                        <b>Tel :</b> {{ contact.tel }} <br>
+                                        <b>Site :</b> {{ contact.site }}
+                                    </p>
+                                    <form action="{{ path("deletecontact") }}" method="post" style="display: inline;">
+                                        <input type="hidden" name="id" value="{{ contact.id }}">
+                                        <input type="submit" value="Delete" class=" btn red" style="margin-bottom:5px;"/>
+                                    </form>
+                                    <a class="btn modal-trigger orange darken-1" href="#modal_edit_{{ contact.id }}" style="margin-bottom:5px;margin-right:5px;">Edit</a>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="card-action">
+                        <a class="btn modal-trigger" href="#modal_add">Add contact</a>
+                        <a href="{{ path('fos_user_security_logout') }}" class="btn red" style="float: right;">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for contact in contacts %}
+        <form action="{{ path("editcontact") }}" method="post">
+            <div id="modal_edit_{{ contact.id }}" class="modal">
+                <div class="modal-content">
+                    <h4 style="text-align: -webkit-center;">Edit contact</h4>
+                    <hr>
+                    <div class="row" style="margin-top:30px;">
+                        <div class="col s6">
+                            <label for="name">Name :</label>
+                            <input type="text" name="name" value="{{ contact.nom }}">
+                        </div>
+                        <div class="col s6">
+                            <label for="firstname">Firstname :</label>
+                            <input type="text" name="firstname" value="{{ contact.prenom }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <label for="email">Email :</label>
+                            <input type="text" name="email" value="{{ contact.email }}">
+                        </div>
+                        <div class="col s6">
+                            <label for="address">Address :</label>
+                            <input type="text" name="address" value="{{ contact.adresse }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <label for="tel">Tel :</label>
+                            <input type="text" name="tel" value="{{ contact.tel }}">
+                        </div>
+                        <div class="col s6">
+                            <label for="site">Site :</label>
+                            <input type="text" name="site" value="{{ contact.site }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" value="{{ contact.id }}">
+                    <a href="#" class="modal-action modal-close btn grey darken-3 ">Cancel</a>
+                    <input type="submit" value="Save" class="btn" style="margin-right:5px;"/>
+                </div>
+            </div>
+        </form>
+    {% endfor %}
+
+    <form action="{{ path("addcontact") }}" method="post">
+        <div id="modal_add" class="modal">
+            <div class="modal-content">
+                <h4 style="text-align: -webkit-center;">New contact</h4>
+                <hr>
+                <div class="row" style="margin-top:30px;">
+                    <div class="col s6">
+                        <label for="name">Name :</label>
+                        <input type="text" name="name" value="">
+                    </div>
+                    <div class="col s6">
+                        <label for="firstname">Firstname :</label>
+                        <input type="text" name="firstname" value="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <label for="email">Email :</label>
+                        <input type="text" name="email" value="">
+                    </div>
+                    <div class="col s6">
+                        <label for="address">Address :</label>
+                        <input type="text" name="address" value="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <label for="tel">Tel :</label>
+                        <input type="text" name="tel" value="">
+                    </div>
+                    <div class="col s6">
+                        <label for="site">Site :</label>
+                        <input type="text" name="site" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close btn grey darken-3 ">Cancel</a>
+                <input type="submit" value="Add" class="btn" style="margin-right:5px;"/>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.modal-trigger').leanModal();
+    });
+    </script>
+{% endblock %}

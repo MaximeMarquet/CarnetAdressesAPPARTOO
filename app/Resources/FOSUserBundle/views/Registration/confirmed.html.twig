@@ -1,0 +1,22 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <h2 class="header" style="text-align: -webkit-center;">Success</h2>
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content" style="text-align: -webkit-center;">
+                        {% trans_default_domain 'FOSUserBundle' %}
+                        <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+                        {% if targetUrl %}
+                        <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                        {% endif %}
+                        <a href="{{ path('fos_user_security_login') }}" class="btn" style="margin-top:10px;">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}
