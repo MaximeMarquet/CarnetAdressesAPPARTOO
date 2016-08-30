@@ -5,7 +5,9 @@ CarnetAdressesAPPARTOO
 Conseils d'installation :
 
   ⇩⇩⇩⇩⇩ Initialisation ⇩⇩⇩⇩⇩
+  
     Ouvrir un invité de commande et se placer dans le répertoire courant
+    
     Executer la commande "composer install"
 
   ⇩⇩⇩⇩⇩ Base de données ⇩⇩⇩⇩⇩
